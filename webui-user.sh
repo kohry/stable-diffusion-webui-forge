@@ -9,7 +9,7 @@ install_dir="/home/$(whoami)"
 # Name of the subdirectory
 clone_dir="stable-diffusion-webui"
 
-export COMMANDLINE_ARGS="--api --listen --port 7861"
+export COMMANDLINE_ARGS="--api --xformers --listen --port 7861"
 export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --ckpt-dir ${install_dir}/${clone_dir}/models/Stable-diffusion"
 export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --hypernetwork-dir ${install_dir}/${clone_dir}/models/hypernetworks"
 export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --embeddings-dir ${install_dir}/${clone_dir}/models/embeddings"
