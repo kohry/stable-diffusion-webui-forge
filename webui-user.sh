@@ -4,10 +4,17 @@
 #########################################################
 
 # Install directory without trailing slash
-#install_dir="/home/$(whoami)"
+install_dir="/home/$(whoami)"
 
 # Name of the subdirectory
-#clone_dir="stable-diffusion-webui"
+clone_dir="stable-diffusion-webui"
+
+export COMMANDLINE_ARGS="--api --listen --port 7861"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --ckpt-dir ${install_dir}/${clone_dir}/models/Stable-diffusion"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --hypernetwork-dir ${install_dir}/${clone_dir}/models/hypernetworks"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --embeddings-dir ${install_dir}/${clone_dir}/models/embeddings"
+export COMMANDLINE_ARGS="${COMMANDLINE_ARGS} --lora-dir ${install_dir}/${clone_dir}/models/Lora"
+
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 #export COMMANDLINE_ARGS=""
@@ -19,7 +26,7 @@
 #export GIT="git"
 
 # python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-#venv_dir="venv"
+venv_dir="venv"
 
 # script to launch to start the app
 #export LAUNCH_SCRIPT="launch.py"

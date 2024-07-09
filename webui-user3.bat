@@ -3,7 +3,7 @@
 set PYTHON=
 set GIT=
 set VENV_DIR=
-set COMMANDLINE_ARGS=--api --reinstall-xformers --medvram --xformers --listen --port 7861
+set COMMANDLINE_ARGS=--api --xformers --listen --port 7861
 
 @REM Uncomment following code to reference an existing A1111 checkout.
 @REM set A1111_HOME=Your A1111 checkout dir
