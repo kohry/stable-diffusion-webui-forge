@@ -1,2 +1,2 @@
-Requirement already satisfied: opencv-python in e:\project\forge_kohry\venv\lib\site-packages (4.10.0.84)
-Requirement already satisfied: numpy>=1.17.0 in e:\project\forge_kohry\venv\lib\site-packages (from opencv-python) (1.26.2)
+Requirement already satisfied: opencv-python in e:\project\triposr\venv\lib\site-packages (4.10.0.84)
+Requirement already satisfied: numpy>=1.17.0 in e:\project\triposr\venv\lib\site-packages (from opencv-python) (1.26.2)

@@ -1,9 +1,14 @@
 @echo off
 
+:: 설정 파일 호출
 if exist webui.settings.bat (
     call webui.settings.bat
 )
 
+echo "dp0"
+echo %~dp0
+
+:: 환경 변수 설정
 if not defined PYTHON (set PYTHON=python)
 if defined GIT (set "GIT_PYTHON_GIT_EXECUTABLE=%GIT%")
 if not defined VENV_DIR (set "VENV_DIR=%~dp0%venv")
@@ -11,14 +16,19 @@ if not defined VENV_DIR (set "VENV_DIR=%~dp0%venv")
 set SD_WEBUI_RESTART=tmp/restart
 set ERROR_REPORTING=FALSE
 
+:: 로그 디렉토리 생성
 mkdir tmp 2>NUL
 
+:: Python 실행 여부 확인
+echo Checking if Python is available... python env
+echo %PYTHON%
 %PYTHON% -c "" >tmp/stdout.txt 2>tmp/stderr.txt
 if %ERRORLEVEL% == 0 goto :check_pip
 echo Couldn't launch python
 goto :show_stdout_stderr
 
 :check_pip
+echo Checking if pip is available...
 %PYTHON% -mpip --help >tmp/stdout.txt 2>tmp/stderr.txt
 if %ERRORLEVEL% == 0 goto :start_venv
 if "%PIP_INSTALLER_LOCATION%" == "" goto :show_stdout_stderr
@@ -28,6 +38,7 @@ echo Couldn't install pip
 goto :show_stdout_stderr
 
 :start_venv
+echo Starting virtual environment...
 if ["%VENV_DIR%"] == ["-"] goto :skip_venv
 if ["%SKIP_VENV%"] == ["1"] goto :skip_venv
 
@@ -43,32 +54,34 @@ goto :show_stdout_stderr
 
 :activate_venv
 set PYTHON="%VENV_DIR%\Scripts\Python.exe"
-echo venv %PYTHON%
+echo Activating venv: %PYTHON%
 
 :skip_venv
+echo Skipping virtual environment setup...
 if [%ACCELERATE%] == ["True"] goto :accelerate
 goto :launch
 
 :accelerate
-echo Checking for accelerate
+echo Checking for accelerate...
 set ACCELERATE="%VENV_DIR%\Scripts\accelerate.exe"
 if EXIST %ACCELERATE% goto :accelerate_launch
 
 :launch
+echo Launching application...
+echo %PYTHON%
 %PYTHON% launch.py %*
 if EXIST tmp/restart goto :skip_venv
 pause
 exit /b
 
 :accelerate_launch
-echo Accelerating
+echo Accelerating...
 %ACCELERATE% launch --num_cpu_threads_per_process=6 launch.py
 if EXIST tmp/restart goto :skip_venv
 pause
 exit /b
 
 :show_stdout_stderr
-
 echo.
 echo exit code: %errorlevel%
 
@@ -80,13 +93,12 @@ type tmp\stdout.txt
 
 :show_stderr
 for /f %%i in ("tmp\stderr.txt") do set size=%%~zi
-if %size% equ 0 goto :show_stderr
+if %size% equ 0 goto :endofscript
 echo.
 echo stderr:
 type tmp\stderr.txt
 
 :endofscript
-
 echo.
 echo Launch unsuccessful. Exiting.
 pause

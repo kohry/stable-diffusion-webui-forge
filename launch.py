@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from modules import launch_utils
 
 args = launch_utils.args

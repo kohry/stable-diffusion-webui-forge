@@ -100,16 +100,16 @@ class ControlNetForForgeOfficial(scripts.Script):
 
     def get_enabled_units(self, units: List[Union[UiControlNetUnit, dict]]) -> List[UiControlNetUnit]:
         # Convert dictionaries to UiControlNetUnit instances if needed
-        print(units)
+        # print(units)
         processed_units = [
             self.dict_to_uicontrolnetunit(unit) if isinstance(unit, dict) else unit
             for unit in units
         ]
-        print(processed_units)
+        # print(processed_units)
         # Filter and return enabled units
         enabled_units = [unit for unit in processed_units if unit.enabled]
-        print("enabled unit")
-        print(enabled_units)
+        # print("enabled unit")
+        # print(enabled_units)
         return enabled_units
     
     def base64_to_numpy(self, base64_str: str) -> np.ndarray:
