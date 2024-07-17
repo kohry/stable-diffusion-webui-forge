@@ -5,7 +5,7 @@ set GIT=
 set VENV_DIR=
 set COMMANDLINE_ARGS=--api --xformers --listen --port 7861
 
-set A1111_HOME=E:\project\stable-diffusion-webui
+set A1111_HOME=E:/project/stable-diffusion-webui
 
 
 set VENV_DIR=%A1111_HOME%/venv
